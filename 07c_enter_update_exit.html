@@ -26,9 +26,9 @@
         .attr("r", 25);
     var circles = canvas.selectAll("circle")
         .data(data)
-        .attr("fill", "green")
+        .attr("fill", "green") // update
         .exit()
-            .attr("fill", "blue");
+            .attr("fill", "blue"); // exit
 </script>
 </body>
 </html>

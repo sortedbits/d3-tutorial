@@ -6,7 +6,6 @@
 </head>
 <body>
 <script>
-
     /*
     DOM elements < data elements (enter select, data elems not bound)
     DOM elements > data elements (exit select, dom elems not bound)
@@ -17,17 +16,14 @@
         .append("svg")
         .attr("width", 500)
         .attr("height", 500);
-
     var circle1 = canvas.append("circle") // update selection
         .attr("cx", 50)
         .attr("cy", 100)
         .attr("r", 25);
-
     var circle2 = canvas.append("circle") // update selection
         .attr("cx", 50)
         .attr("cy", 100)
         .attr("r", 25);
-
     var circles = canvas.selectAll("circle")
         .data(data)
         .attr("fill", "red") // update selection
