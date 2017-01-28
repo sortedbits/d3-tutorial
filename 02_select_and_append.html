@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>02 - select and append</title>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+    <p></p>
+    <script>
+        d3.select("p").text("first paragraph");
+        d3.select("body")
+            .append("p")
+            .text("second paragraph");
+        console.log(d3);
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>03a - svg</title>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+<a>test</a>
+<script>
+    d3.select("body")
+        .append("p")
+        .style("color", "red")
+        .text("paragraph");
+    d3.select("a")
+        .attr("href", "javascript:alert('hello');")
+</script>
+</body>
+</html>
