@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>20 - maps</title>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+<script>
+    var width = 760;
+    var height = 700;
+    var canvas = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    d3.json("20_data.geojson", function (data) {
+        var group = canvas.selectAll("g")
+                .data(data.features)
+                .enter()
+                .append("g")
+        var settings = getSettings(data);
+        console.log(settings);
+        var projection = d3.geo.mercator()
+            .center(settings.center)
+            .scale(settings.scale)
+            .translate(settings.offset);
+        var path = d3.geo.path().projection(projection);
+        var areas = group.append("path")
+            .attr("d", path)
+            .attr("class", "area")
+            .attr("fill", "steelblue");
+
+        group.append("text")
+            .attr("x", function (d) { return path.centroid(d)[0]; })
+            .attr("y", function (d) { return path.centroid(d)[1]; })
+            .attr("text-anchor", "middle")
+            .text(function (d) { return d.properties.NOME_REG});
+    });
+    function getSettings(data) {
+        var center = d3.geo.centroid(data)
+        var scale  = 150;
+        var offset = [width/2, height/2];
+        var projection = d3.geo.mercator()
+            .scale(scale)
+            .center(center)
+            .translate(offset);
+        var path = d3.geo.path().projection(projection);
+        var bounds  = path.bounds(data);
+        var hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
+        var vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
+        var scale   = (hscale < vscale) ? hscale : vscale;
+        var offset  = [width - (bounds[0][0] + bounds[1][0])/2, height - (bounds[0][1] + bounds[1][1])/2];
+        var result = {};
+        result["center"] = center;
+        result["scale"] = scale;
+        result["offset"] = offset;
+        return result;
+    }
+</script>
+</body>
+</html>
